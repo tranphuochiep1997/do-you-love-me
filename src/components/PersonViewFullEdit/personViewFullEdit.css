@@ -1,0 +1,72 @@
+.person-view-full-edit {
+  padding: 5px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.person-view-full-edit-wrap-info {
+  font-size: 14px;
+  color: #90949c;
+  line-height: 18px;
+  height: 100%;
+  width: 50%;
+  position: relative;
+}
+.person-view-full-edit-wrap-img {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+}
+.person-view-full-edit-wrap-img > img {
+  height: auto;
+  width: 90%;
+  max-width: 300px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.person-view-full-edit-heading {
+  font-weight: bold;
+  padding: 5px 0px;
+  color: #4AB3F4;
+}
+.person-view-full-edit-detail{
+  padding: 12px 0px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+.person-view-full-edit-detail .detail-value {
+  float: right;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.8);
+  width: 50%;
+}
+.person-view-full-edit-detail .input-birthday {
+  float: right;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+.btn-save-profile {
+  font-size: 10px;
+  box-shadow: none;
+  position: absolute;
+  top: -5px;
+  right: 0;
+}
+.btn-save-profile:focus {
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+}
+@media screen and (max-width: 600px) {
+  .person-view-full-edit-wrap-info {
+    font-size: 12px;
+  }
+  .person-view-full-edit-detail .detail-value, .group-gender {
+    width: 100%;
+  }
+}

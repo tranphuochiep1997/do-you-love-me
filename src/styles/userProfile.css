@@ -1,0 +1,9 @@
+.btn-edit-profile {
+  font-size: 10px;
+  box-shadow: none;
+}
+.btn-edit-profile:focus {
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+}

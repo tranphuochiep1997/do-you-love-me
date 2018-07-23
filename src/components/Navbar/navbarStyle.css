@@ -1,0 +1,74 @@
+.navbar-light .navbar-brand {
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar-light .navbar-brand::after {
+  content: '';
+  width: 0px;
+  height: 1px;
+  display: block;
+  background: black;
+  transition: 300ms;
+}
+.navbar-light .navbar-brand:hover::after {
+  width: 100%;
+}
+
+.bg-light {
+  padding: 0px 25px;
+}
+@media screen and (max-width: 600px) {
+  .bg-light {
+      padding: 0px 10px;
+  }
+}
+.navbar-light .navbar-nav .nav-link {
+  cursor: pointer;
+}
+.nav-item-profile :hover {
+  color: rgba(0, 0, 0, .5) !important;
+  background-color: #E4F0F6;
+}
+.wrap-name-status {
+  position: relative;
+}
+.nav-item-status {
+  font-size: 10px;
+  font-style: italic;
+  position: absolute;
+  bottom: -2px;
+  left: 0.5rem;
+}
+.nav-item-name {
+  font-size: 15px;
+  color: rgba(0, 0, 0, .5);
+}
+.nav-item-dropdown {
+  position: relative;
+}
+.nav-item-dropdown > a {
+  height: 100%;
+}
+.nav-item-dropdown .dropdown-menu {
+  font-size: 12px;
+  padding: 0px;
+  min-width: 10rem;
+  position: absolute;
+  width: 50px;
+  left: -100px;
+}
+.dropdown-toggle::after {
+  vertical-align: 0;
+}
+.form-search-input:focus {
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+  border-color: #ced4da;
+}
+.form-search-button:focus {
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+}

@@ -1,0 +1,12 @@
+.view-page {
+}
+.accepted-list {
+}
+.recommend-list {
+}
+.received-list {
+
+}
+.accepted-list .recommend-list .received-list {
+  padding-top: 10px;
+}

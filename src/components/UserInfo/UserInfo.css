@@ -1,0 +1,40 @@
+.userInfo-wrap-info {
+  font-size: 14px;
+  color: #90949c;
+  line-height: 18px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.userInfo-heading {
+  font-weight: bold;
+  padding: 5px 0px;
+  color: #4AB3F4;
+}
+.userInfo-detail{
+  padding: 12px 0px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+.userInfo-detail .detail-value {
+  float: right;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.8);
+  width: 50%;
+}
+.btn-edit-profile {
+  font-size: 10px;
+  box-shadow: none;
+  position: absolute;
+  top: -5px;
+  right: 0;
+}
+.btn-edit-profile:focus {
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+}
+@media screen and (max-width: 600px) {
+  .userInfo-wrap-info {
+    font-size: 12px;
+  }
+}

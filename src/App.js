@@ -5,20 +5,28 @@ import Home from './views/Home';
 import PrivateRoute from "./helpers/PrivateRoute";
 import UserProfile from "./views/UserProfile";
 import {connect} from "react-redux";
-import UserInfo from "./components/UserInfo/UserInfo";
+import ChatRoom from "./views/ChatRoom";
+import Navbar from './components/Navbar/Navbar';
+import FriendProfile from './views/FriendProfile';
+
 
 class App extends Component {
   render() {
-    return (
+    return (     
+      <div>
+      {
+        this.props.loggedIn ? <Navbar /> : null
+      } 
       <Router>
         <Switch>
           <PrivateRoute exact path="/" loggedIn={this.props.loggedIn} component={Home} />
-          {/* <Route exact path="/" component={UserInfo} /> */}
-          <PrivateRoute exact path="/me" loggedIn={this.props.loggedIn} component={UserProfile} />
-          {/* <Route exact path="/me" component={UserProfile} /> */}
+          <PrivateRoute exact path="/profile/me" loggedIn={this.props.loggedIn} component={UserProfile} />
+          <PrivateRoute exact path="/profile/:id" loggedIn={this.props.loggedIn} component={FriendProfile} />
+          <PrivateRoute exact path="/chat/:id" loggedIn={this.props.loggedIn} component={ChatRoom} />
           <Route exact path="/login" component={Login} />
         </Switch>
       </Router>
+      </div>
     );
   }
 }

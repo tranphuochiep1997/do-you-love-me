@@ -17,16 +17,13 @@
 }
 .userInfo-detail .detail-value {
   float: right;
-  text-align: right;
+  text-align: left;
   color: rgba(0, 0, 0, 0.8);
-  width: 50%;
+  width: 60%;
 }
 .btn-edit-profile {
-  font-size: 10px;
+  font-size: 12px;
   box-shadow: none;
-  position: absolute;
-  top: -5px;
-  right: 0;
 }
 .btn-edit-profile:focus {
   -webkit-box-shadow: none;
@@ -35,6 +32,13 @@
 }
 @media screen and (max-width: 600px) {
   .userInfo-wrap-info {
-    font-size: 12px;
+    font-size: 11px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .btn-edit-profile {
+    position: absolute;
+    top: -7px;
+    right: 0;
   }
 }

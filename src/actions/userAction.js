@@ -3,20 +3,19 @@ import {ACTION_TYPE_USER} from '../constants/actionType';
 import {userService} from "../services/userService";
 import {FacebookApi} from "../helpers/FacebookApi";
 
-export const getProfile = async (userID=null)=> {
+export const getUserProfile = async ()=> {
   store.dispatch({
-    type: ACTION_TYPE_USER.GET_PROFILE_DOING
+    type: ACTION_TYPE_USER.GET_USER_PROFILE_DOING
   });
-  userID = userID || JSON.parse((localStorage.getItem('user'))).userID;
+  const {userID, accessToken} = JSON.parse((localStorage.getItem('user')));
   try {
     let getResponse = await userService.getUserByFacebookId(userID);
     if (!getResponse.error) {
       store.dispatch({
-        type: ACTION_TYPE_USER.GET_PROFILE_SUCCESS,
+        type: ACTION_TYPE_USER.GET_USER_PROFILE_SUCCESS,
         payload: getResponse.data
       });
     } else if (getResponse.message === "user_not_exist"){
-      const {userID, accessToken} = JSON.parse(localStorage.getItem("user"));
       const user = await FacebookApi.getUser({userID, accessToken});
       if (!user.error){
         user.facebookId = user.id;
@@ -24,18 +23,18 @@ export const getProfile = async (userID=null)=> {
         const createdUser = await userService.createNewUser(user);
         if (!createdUser.error){
           store.dispatch({
-            type: ACTION_TYPE_USER.GET_PROFILE_SUCCESS,
+            type: ACTION_TYPE_USER.GET_USER_PROFILE_SUCCESS,
             payload: createdUser.data
           });
         } else {
           store.dispatch({
-            type: ACTION_TYPE_USER.GET_PROFILE_FAILED,
+            type: ACTION_TYPE_USER.GET_USER_PROFILE_FAILED,
           });
         }
         
       } else{
         store.dispatch({
-          type: ACTION_TYPE_USER.GET_PROFILE_FAILED
+          type: ACTION_TYPE_USER.GET_USER_PROFILE_FAILED
         });
       }
       
@@ -43,7 +42,7 @@ export const getProfile = async (userID=null)=> {
   } catch(err) {
     console.log(err);
     store.dispatch({
-      type: ACTION_TYPE_USER.GET_PROFILE_FAILED
+      type: ACTION_TYPE_USER.GET_USER_PROFILE_FAILED
     });
   }
 }
@@ -54,18 +53,18 @@ export const updateProfile = async(user) =>{
     const response = await userService.updateUser(userID, user);
     if (!response.error){
       store.dispatch({
-        type: ACTION_TYPE_USER.UPDATE_PROFILE_SUCCESS,
+        type: ACTION_TYPE_USER.UPDATE_USER_PROFILE_SUCCESS,
         payload: response.data
       });
     }else {
       store.dispatch({
-        type: ACTION_TYPE_USER.UPDATE_PROFILE_FAILED
+        type: ACTION_TYPE_USER.UPDATE_USER_PROFILE_FAILED
       });
     }
   } catch(err){
     console.log(err);
     store.dispatch({
-      type: ACTION_TYPE_USER.UPDATE_PROFILE_FAILED
+      type: ACTION_TYPE_USER.UPDATE_USER_PROFILE_FAILED
     });
   }
 }

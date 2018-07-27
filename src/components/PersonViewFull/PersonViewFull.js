@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import FormEditUser from "../FormEditUser/FormEditUser";
 import UserInfo from "../UserInfo/UserInfo";
 import {connect} from "react-redux";
-import { getProfile } from "../../actions/userAction";
 
 class PersonViewFull extends Component {
   constructor(props){

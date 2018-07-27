@@ -9,7 +9,8 @@ class ViewPage extends Component {
     getAllUser();
   }
   render() {
-    let {users} = this.props;
+    let {allUser, user} = this.props;
+    let removeCurrentUser = allUser.filter(queryUser => queryUser.facebookId !== user.facebookId);
     return (
       <div className="container">
         <div className="row view-page">
@@ -17,7 +18,7 @@ class ViewPage extends Component {
             <ViewList listTitle="Recently" data={[]} />
           </div> 
           <div className="col-12 col-md-4 recommend-list">
-            <ViewList listTitle="You may know" data={users} />
+            <ViewList {...this.props} listTitle="You may know" data={removeCurrentUser} />
           </div> 
           <div className="col-12 col-md-4 received-list">
             <ViewList listTitle="Received" data={[]} />
@@ -29,7 +30,8 @@ class ViewPage extends Component {
 }
 const mapStateToProps = state =>{
   return {
-    users: state.allUserReducer.users
+    allUser: state.allUserReducer.users,
+    user: state.userReducer.user
   }
 }
 

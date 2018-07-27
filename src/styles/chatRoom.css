@@ -1,0 +1,11 @@
+.chat-room {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 0px;
+}
+
+@media screen and (min-width: 600px) {
+  .chat-room {
+    padding: 15px 50px;
+  }
+}

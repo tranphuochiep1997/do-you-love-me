@@ -20,18 +20,15 @@
   float: right;
   text-align: left;
   color: rgba(0, 0, 0, 0.8);
-  width: 50%;
+  width: 60%;
 }
 .formEditUser-edit-detail .input-birthday {
   float: right;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 .btn-save-profile {
-  font-size: 10px;
+  font-size: 12px;
   box-shadow: none;
-  position: absolute;
-  top: -5px;
-  right: 0;
 }
 .btn-save-profile:focus {
   -webkit-box-shadow: none;
@@ -44,5 +41,12 @@
   }
   .formEditUser-edit-detail .detail-value, .group-gender {
     width: 100%;
+  }
+}
+@media screen and (min-width: 600px) {
+  .btn-save-profile {
+    position: absolute;
+    top: -7px;
+    right: 0;
   }
 }

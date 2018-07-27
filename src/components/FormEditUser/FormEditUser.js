@@ -10,7 +10,7 @@ class FormEditUser extends PureComponent {
       name: name || "",
       status,
       birthday: !birthday ? "" : birthday.split("T")[0],
-      gender: gender === 0 ? 0 : gender === 1 ? 1 : "",
+      gender: gender === 0 ? 0 : (gender === 1 ? 1 : ""),
       about: about || ""
     }
 
@@ -21,17 +21,15 @@ class FormEditUser extends PureComponent {
 
   onSubmit(event) {
     event.preventDefault();
-    let {hasChanged, user} = this.getChangedObject();
+    let {hasChanged, user} = this.getChangedObject({state: this.state, props: this.props});
     if (hasChanged === true){
       updateProfile(user);
     }
     this.props.onClickSaveButton();
   }
-  getChangedObject(){
-    const {state, props} = this;
+  getChangedObject({state, props}){
     state.name = state.name.trim();
     state.about = state.about.trim();
-    state.birthday = new Date(state.birthday).toISOString();
     let user = {};
     let hasChanged = false;
     if (state.name !== props.name){
@@ -39,7 +37,11 @@ class FormEditUser extends PureComponent {
       hasChanged = true;
     }
     if (state.birthday !== props.birthday){
-      user.birthday = state.birthday;
+      if (state.birthday){
+        user.birthday = new Date(state.birthday).toISOString();
+      } else {
+        user.birthday = "";
+      }
       hasChanged = true;
     }
     if (state.gender !== props.gender){

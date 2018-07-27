@@ -62,8 +62,8 @@ class FacebookButton extends Component {
         }
         this.setState({
           label: label
-        })
-      }).bind(this);
+        });
+      })
     }.bind(this);
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -80,9 +80,7 @@ class FacebookButton extends Component {
   }
   render(){
     return (
-      <div className="facebookButtonContainer">
-        <button className="facebookButton" onClick={this.handleLogin}>{this.state.label}</button>
-      </div>
+      <button className="facebookButton" onClick={this.handleLogin}>{this.state.label}</button>
     );
   }
 }

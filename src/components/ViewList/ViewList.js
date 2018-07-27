@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import PersonView from "../PersonView/PersonView";
 
 class ViewList extends Component {
-
+  constructor(props){
+    super(props)
+  }
   render() {
     let {data, listTitle} = this.props;
     return (
@@ -16,11 +18,7 @@ class ViewList extends Component {
             (!!data.length)
             ?
             data.map((element, key)=>{
-              let {picture, name, status} = element;
-              return <PersonView key={key} 
-                picture = {picture}
-                name={name}
-                status={status}/>
+              return <PersonView history={this.props.history} key={key} {...element}/>
             })
             : 
             <span>...</span>

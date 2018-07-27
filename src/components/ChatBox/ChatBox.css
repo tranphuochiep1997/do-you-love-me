@@ -1,0 +1,51 @@
+.chatbox {
+  color: rgba(0, 0, 0, 0.7);
+}
+.chatbox-input {
+  padding: 0px 5px;
+}
+.input-message {
+  font-size: 1.3rem;
+  outline: none;
+  height: 10vh;
+}
+.send-message {
+  box-shadow: none;
+  outline: none;
+  padding: 3px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+}
+.send-message:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+.send-message:focus {
+  outline: none;
+}
+@media screen and (min-width: 600px) {
+  .chatbox-input {
+    padding: 0px;
+  }
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

@@ -2,11 +2,12 @@ import "./FormSearch.css";
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, fas } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import {userService} from "../../services/userService";
+import {search} from "../../actions/searchAction";
 
 class FormSearch extends PureComponent{
   constructor(props){
@@ -22,6 +23,7 @@ class FormSearch extends PureComponent{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.callSearch = search.bind(this);
   }
 
   componentDidMount () {
@@ -40,7 +42,7 @@ class FormSearch extends PureComponent{
     })
     if (!!search.trim()){
 
-      const response = await userService.getAllUser(search);
+      const response = await userService.getAllUser({search});
       if (!response.error){
         this.setState({
           searchedUsers: response.data,
@@ -67,6 +69,7 @@ class FormSearch extends PureComponent{
     })
     let search = this.state.search;
     if (search.trim()){
+      this.callSearch(search);
       this.props.history.push(`/search/${search}`);
     }
   }
@@ -82,9 +85,6 @@ class FormSearch extends PureComponent{
     })
   }
   render(){
-    // let filteredCurrentUsers =  this.state.search.length > 0 ? allUser.filter(user =>{
-    //   return user.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
-    // }) : [];
     let {searchedUsers, searching} = this.state;
     return (
       <form className="form-inline position-relative my-2 my-lg-0" onSubmit={this.handleSubmit}>
@@ -115,9 +115,6 @@ class FormSearch extends PureComponent{
       </form>
     );
   }
-}
-FormSearch.defaultProps = {
-  searchedUsers: []
 }
 
 export default FormSearch;

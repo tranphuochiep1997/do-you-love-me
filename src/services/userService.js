@@ -10,7 +10,7 @@ import {config} from "../constants/config";
     const json = await response.json();
     return json;
   }
-  const getAllUser = async (search="", page=0)=>{
+  const getAllUser = async ({search="", page=0})=>{
     let url = "";
     if (!!search){
       url = `${config.SERVER_API}/users?page=${page}&search=${search}`;

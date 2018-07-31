@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
-import FacebookButton from "../components/FacebookButton/FacebookButton";
 import FormRegister from "../components/FormRegister/FormRegister";
 
 class Register extends Component {

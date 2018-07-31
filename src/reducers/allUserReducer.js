@@ -1,7 +1,11 @@
 import {ACTION_TYPE_USER} from '../constants/actionType';
 
+const credentials = JSON.parse(localStorage.getItem("credentials"));
+
 const initialState = {
-  users: []
+  users: [],
+  loading: false,
+  nextPage: 0
 }
 
 const allUserReducer = (state = initialState, action = {}) => {
@@ -9,25 +13,33 @@ const allUserReducer = (state = initialState, action = {}) => {
     case ACTION_TYPE_USER.GET_ALL_USER_DOING:
       return {
         ...state,
-        users: [{
-          name: "...",
-          about: "...",
-          status: "...",
-          birthday: "...",
-          gender: "...",
-          email: "...",
-          picture: "https://scontent.fdad2-1.fna.fbcdn.net/v/t1.0-1/c47.0.160.160/p160x160/10354686_10150004552801856_220367501106153455_n.jpg?_nc_cat=0&oh=64e8f9fb1b3f0e70939b56f91adca78d&oe=5C0C2B49"
-        }]
+        loading: true,
+        nextPage: 0
       }
     case ACTION_TYPE_USER.GET_ALL_USER_SUCCESS:
+      const userWithoutCurrentUser = action.payload.filter(user =>{
+        return user._id !== credentials.user._id;
+      });
       return {
         ...state,
-        users: action.payload
+        users: userWithoutCurrentUser,
+        nextPage: action.nextPage,
+        loading: false
+      }
+    case ACTION_TYPE_USER.LOAD_MORE_USER_SUCCESS:
+      const userWithoutCurrentUserLoadMore = action.payload.filter(user =>{
+        return user._id !== credentials.currentUserId;
+      });
+      return {
+        ...state,
+        users: [...state.users, ...userWithoutCurrentUserLoadMore],
+        nextPage: action.nextPage,
+        loading: false
       }
     case ACTION_TYPE_USER.GET_ALL_USER_FAILED:
       return {
         ...state,
-        error: "failed"
+        loading: false
       }
     default:
       return state;

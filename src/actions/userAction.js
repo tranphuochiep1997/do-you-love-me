@@ -1,14 +1,15 @@
 import {store} from "../store/store";
 import {ACTION_TYPE_USER} from '../constants/actionType';
 import {userService} from "../services/userService";
+import {config} from "../constants/config";
 
 export const getUserProfile = async ()=> {
   store.dispatch({
     type: ACTION_TYPE_USER.GET_USER_PROFILE_DOING
   });
-  const {user, token} = JSON.parse((localStorage.getItem('user')));
+  const credentials= JSON.parse((localStorage.getItem('credentials')));
   try {
-    let getResponse = await userService.getUserById(user._id);
+    let getResponse = await userService.getUserById(credentials.user._id);
     if (!getResponse.error) {
       store.dispatch({
         type: ACTION_TYPE_USER.GET_USER_PROFILE_SUCCESS,
@@ -54,20 +55,46 @@ export const updateProfile = async(newUser) =>{
     });
   }
 }
-export const getAllUser = async() =>{
+export const getAllUser = async(page=0) =>{
   try {
     store.dispatch({
       type: ACTION_TYPE_USER.GET_ALL_USER_DOING
      });
-    const response = await userService.getAllUser();
+    const response = await userService.getAllUser({page});
     if (!response.error){
       store.dispatch({
         type: ACTION_TYPE_USER.GET_ALL_USER_SUCCESS,
+        nextPage: response.data.length >= config.LIMIT_REQUEST_USER ? ++page : 0,
         payload: response.data
       });
     }else {
       store.dispatch({
         type: ACTION_TYPE_USER.GET_ALL_USER_FAILED
+      });
+    }
+  } catch(err){
+    console.log(err);
+    store.dispatch({
+      type: ACTION_TYPE_USER.GET_ALL_USER_FAILED
+    });
+  }
+}
+export const loadMore = async(page=0) =>{
+  try {   
+    store.dispatch({
+      type: ACTION_TYPE_USER.GET_ALL_USER_DOING
+     });
+    const response = await userService.getAllUser({page});
+    if (!response.error){
+      store.dispatch({
+        type: ACTION_TYPE_USER.LOAD_MORE_USER_SUCCESS,
+        payload: response.data,
+        nextPage: response.data.length >= config.LIMIT_REQUEST_USER ? ++page : 0
+      });
+    } else {
+      store.dispatch({
+        type: ACTION_TYPE_USER.GET_ALL_USER_FAILED,
+        payload: response.message
       });
     }
   } catch(err){

@@ -2,13 +2,26 @@ import "./viewList.css";
 import React, { Component } from "react";
 import PersonView from "../PersonView/PersonView";
 import {connect} from "react-redux";
+import ShowMore from "../ShowMore/ShowMore";
+import LoadingIcon from "../LoadingIcon/LoadingIcon";
+import {loadMore} from "../../actions/userAction";
+import {getAllUser} from "../../actions/userAction";
 
 class ViewList extends Component {
   constructor(props){
     super(props)
+    this.handleLoadMore = this.handleLoadMore.bind(this);
+  }
+  componentDidMount(){
+    if (this.props.users.length < 1) {
+      getAllUser();
+    }
+  }
+  handleLoadMore(){
+    loadMore(this.props.nextPage);
   }
   render() {
-    let {data, listTitle, userId} = this.props;
+    let {users, listTitle, loading, nextPage} = this.props;
     return (
       <div className="view-list">
         <div className="view-list-title">
@@ -16,15 +29,19 @@ class ViewList extends Component {
         </div>
         <div className="view-list-show">
           {
-            (!!data.length)
+            (!!users.length)
             ?
-            data.map((element, key)=>{
-              if (element._id !== userId){
-                return <PersonView history={this.props.history} key={key} {...element}/>
-              }
+            users.map((user, key)=>{
+                return <PersonView history={this.props.history} key={key} {...user}/>
             })
             : 
-            <span>...</span>
+            <p className="view-list-no-user">No current users</p>
+          }
+          {
+            loading ? <LoadingIcon size="50px" /> : null
+          }
+          {
+            (nextPage !== 0 && !loading) ? <ShowMore onClick={this.handleLoadMore} /> : null
           }
         </div>
       </div>
@@ -32,11 +49,13 @@ class ViewList extends Component {
   }
 }
 ViewList.defaultProps = {
-  data: []
+  users: []
 }
 const mapStateToProps = state =>{
   return {
-    userId: state.userReducer.user._id
+    users: state.allUserReducer.users,
+    loading: state.allUserReducer.loading,
+    nextPage: state.allUserReducer.nextPage
   }
 }
 export default connect(mapStateToProps)(ViewList);

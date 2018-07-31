@@ -23,7 +23,7 @@ class ChatBox extends PureComponent {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-      const {roomId, error} = this.props;    
+      const {error} = this.props;    
       if (error){
         alert(error);
         this.props.history.goback();
@@ -84,7 +84,7 @@ class ChatBox extends PureComponent {
           <p>{this.props.friendProfile.name}</p>
         </div>
         <div className="chatbox-body">
-          <ChatView user={this.props.user} friendProfile={this.props.friendProfile}/>
+          <ChatView roomId={this.props.roomId} user={this.props.user} friendProfile={this.props.friendProfile}/>
           <form className="chatbox-input" onSubmit={this.handleSubmit}>
             <input  type="text" autoComplete="off" className="input-message" name="messageInput" onChange={this.handleChange} value={this.state.messageInput} type="text" placeholder="Write your message..." />
             <button className="send-message" type="submit" disabled={!this.state.messageInput || !this.props.roomId} >

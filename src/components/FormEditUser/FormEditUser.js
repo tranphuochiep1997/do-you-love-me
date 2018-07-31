@@ -58,7 +58,6 @@ class FormEditUser extends PureComponent {
       hasChanged = true;
     }
     if (state.picture && state.picture !== props.picture){
-      console.log("picture changed");
       user.picture = state.picture;
       hasChanged = true;
     }

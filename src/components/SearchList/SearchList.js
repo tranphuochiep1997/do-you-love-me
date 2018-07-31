@@ -3,14 +3,19 @@ import React, { Component } from "react";
 import PersonView from "../PersonView/PersonView";
 import {connect} from "react-redux";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
-
+import ShowMore from "../ShowMore/ShowMore";
+import {loadMore} from "../../actions/searchAction";
 
 class SearchList extends Component {
   constructor(props){
     super(props)
+    this.handleLoadMore = this.handleLoadMore.bind(this);
+  }
+  handleLoadMore(){
+    loadMore(this.props.match.params.name, this.props.nextPage);
   }
   render() {
-    let {data, userId, searching} = this.props;
+    let {data, searching, nextPage} = this.props;
     return (
       <div className="search-list">
         <div className="search-list-title">
@@ -29,6 +34,9 @@ class SearchList extends Component {
           {
             searching ? <LoadingIcon size="50px" /> : null
           }
+          {
+            (nextPage !== 0 && !searching) ? <ShowMore onClick={this.handleLoadMore} /> : null
+          }
         </div>
       </div>
     );
@@ -39,9 +47,10 @@ SearchList.defaultProps = {
 }
 const mapStateToProps = state =>{
   return {
-    userId: state.userReducer.user._id,
     data: state.searchReducer.users,
-    searching: state.searchReducer.searching
+    searching: state.searchReducer.searching,
+    showMore: state.searchReducer.showMore,
+    nextPage: state.searchReducer.nextPage
   }
 }
 export default connect(mapStateToProps)(SearchList);

@@ -1,0 +1,17 @@
+.show-up {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.show-up>button {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+  outline: none;
+}
+.show-up>button:hover{
+  color: #4dabf7;
+}

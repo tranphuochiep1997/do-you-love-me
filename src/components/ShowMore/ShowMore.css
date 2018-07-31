@@ -1,0 +1,28 @@
+.show-more {
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+.show-more-button {
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 10px;
+  width: 75%;  
+  color: #4dabf7;
+  background-color: #ffffff;
+  box-shadow: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+.show-more-button:hover {
+  color: #ffffff;
+  background-color: #228be6;
+  transition: all 0.2s ease-in-out;
+}
+.show-more-button:focus {
+  -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+  box-shadow: none;
+}

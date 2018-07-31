@@ -1,43 +1,33 @@
-import {ACTION_TYPE_USER} from '../constants/actionType';
+import {ACTION_TYPE_AUTH, ACTION_TYPE_USER} from '../constants/actionType';
 
-const initialState = {
-  user: {}
-}
+const credentials = JSON.parse(localStorage.getItem("credentials"));
+const initialState = credentials ? {loggedIn: true, user: credentials.user} : {loggedIn: false}
+
 
 const userReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case ACTION_TYPE_USER.GET_USER_PROFILE_DOING:
+    case ACTION_TYPE_AUTH.LOGIN_SUCCESS:
       return {
         ...state,
-        user: {
-          name: "...",
-          about: "...",
-          status: "...",
-          birthday: "...",
-          gender: "...",
-          email: "...",
-          picture: "http://walyou.com/wp-content/uploads//2010/12/facebook-profile-picture-no-pic-avatar.jpg"
-        }
+        user: action.payload,
+        loggedIn: true
       }
-    case ACTION_TYPE_USER.GET_USER_PROFILE_SUCCESS:
+    case ACTION_TYPE_AUTH.LOGOUT_SUCCESS:
       return {
         ...state,
-        user: action.payload
-      }
-    case ACTION_TYPE_USER.GET_USER_PROFILE_FAILED:
-      return {
-        ...state,
-        error: "failed"
+        user: {},
+        loggedIn: false
       }
     case ACTION_TYPE_USER.UPDATE_USER_PROFILE_SUCCESS:
       return {
         ...state,
         user: action.payload
       }
-    case ACTION_TYPE_USER.UPDATE_USER_PROFILE_FAILED:
+    case ACTION_TYPE_USER.TOKEN_EXPIRED:
       return {
-        ...state, 
-        error: "failed"
+        ...state,
+        user: {},
+        loggedIn: false
       }
     default:
       return state;

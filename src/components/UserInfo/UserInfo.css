@@ -1,19 +1,22 @@
 .userInfo-wrap-info {
-  font-size: 14px;
+  font-size: 20px;
   color: #90949c;
   line-height: 18px;
-  height: 100%;
   width: 100%;
   position: relative;
 }
 .userInfo-heading {
   font-weight: bold;
-  padding: 5px 0px;
+  padding: 15px 0px;
   color: #4AB3F4;
 }
 .userInfo-detail{
-  padding: 12px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px 0px;
   border-top: 0.5px solid rgba(0, 0, 0, 0.5);
+  overflow-wrap: break-word;
 }
 .userInfo-detail .detail-value {
   float: right;
@@ -22,7 +25,6 @@
   width: 60%;
 }
 .btn-edit-profile {
-  font-size: 12px;
   box-shadow: none;
 }
 .btn-edit-profile:focus {
@@ -38,7 +40,7 @@
 @media screen and (min-width: 600px) {
   .btn-edit-profile {
     position: absolute;
-    top: -7px;
+    top: 0;
     right: 0;
   }
 }

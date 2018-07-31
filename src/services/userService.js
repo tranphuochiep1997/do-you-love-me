@@ -1,38 +1,38 @@
 import {config} from "../constants/config";
 
-  const getUserByFacebookId = async (facebookId) =>{
-    const response = await fetch(`${config.SERVER_API}/users/${facebookId}`);
-    const json = await response.json();
-    return json;
-  }
-  const createNewUser = async (user={})=>{
-    const response = await fetch(`${config.SERVER_API}/users`, {
-      method: 'POST',
-      headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    });
-    const json = await response.json();
-    return json;
-  }
-  const getAllUser = async ()=>{
-    const response = await fetch(`${config.SERVER_API}/users`, {
+  const getUserById = async (userId) =>{
+    const response = await fetch(`${config.SERVER_API}/users/${userId}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     });
+    const json = await response.json();
+    return json;
+  }
+  const getAllUser = async (search="", page=0)=>{
+    let url = "";
+    if (!!search){
+      url = `${config.SERVER_API}/users?page=${page}&search=${search}`;
+    } else {
+      url = `${config.SERVER_API}/users?page=${page}`;
+    }
+    const response = await fetch(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    });
     const json = response.json();
     return json;
   }
-  const updateUser = async (facebookId, user={})=>{
-    const response = await fetch(`${config.SERVER_API}/users/${facebookId}`, {
+  const updateUser = async ({userId, user={}, accessToken})=>{
+    const response = await fetch(`${config.SERVER_API}/users/${userId}`, {
       method: 'PUT',
       headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `${accessToken}`
       },
       body: JSON.stringify(user)
     });
@@ -42,8 +42,7 @@ import {config} from "../constants/config";
 
 
 export const userService = {
-  getUserByFacebookId,
-  createNewUser,
+  getUserById,
   updateUser,
   getAllUser
 };

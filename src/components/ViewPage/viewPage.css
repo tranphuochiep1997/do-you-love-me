@@ -1,12 +1,4 @@
-.view-page {
-}
-.accepted-list {
-}
-.recommend-list {
-}
-.received-list {
 
-}
-.accepted-list .recommend-list .received-list {
+.recommend-list{
   padding-top: 10px;
 }

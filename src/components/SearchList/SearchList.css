@@ -1,0 +1,26 @@
+.viewList {
+  margin-top: 10px;
+}
+.search-list-title {
+  color: #0079BF;
+  background-color: #E4F0F6;
+  padding: 5px 20px;
+  margin-top: 15px;
+  font-size: 2em;
+  font-weight: bold;
+}
+.search-list-title>p{
+  margin: 0px;
+}
+.search-list-show {
+  overflow-y: auto;
+  min-height: 100px;
+}
+.search-no-user {
+  margin-top: 15px;
+  padding: 5px 20px;
+  font-weight: bold;
+  font-size: 1.5em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-style: italic;
+}

@@ -23,12 +23,12 @@ class ChatView extends PureComponent{
   render(){
     let {messageModels, user, friendProfile} = this.props;
     return (
-      <div ref="chatboxBody" className="row chatbox-body">
+      <div ref="chatboxBody" className="chatview">
         {
           (messageModels !== null && messageModels.length > 0)
             ?
             messageModels.map((messageModel, key) => {
-              if (messageModel.sender === user.facebookId){
+              if (messageModel.sender === user._id){
                 return <SendMessage key={key} {...user} body={messageModel.body}/>
               }
               return <ReceiveMessage key={key} {...friendProfile} body={messageModel.body} />
@@ -43,7 +43,6 @@ class ChatView extends PureComponent{
 const mapStateToProps = state => {
   return {
     messageModels: state.chatReducer.messageModels,
-    friendProfile: state.friendReducer.friendProfile
   }
 }
 export default connect(mapStateToProps)(ChatView);

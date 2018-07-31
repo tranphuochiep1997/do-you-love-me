@@ -1,25 +1,15 @@
-.viewList {
-  width: 100%;
-  margin-top: 10px;
-}
 .view-list-title {
-  width: 100%;
+  /* width: 100%; */
   color: #0079BF;
   background-color: #E4F0F6;
   padding: 5px 20px;
   margin-top: 15px;
-}
-.view-list-title >p {
-  font-size: 1em;
-  margin: 0px;
+  font-size: 2em;
   font-weight: bold;
+}
+.view-list-title>p{
+  margin: 0px;
 }
 .view-list-show {
   overflow-y: auto;
-  height: 300px;
-}
-@media screen and (max-width: 600px) {
-  .view-list-show {
-    height: 130px;
-  }
 }

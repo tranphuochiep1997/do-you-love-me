@@ -35,11 +35,19 @@ export const setRoomId = async (roomId) => {
 }
 export const fetchMessageHistory = async (roomId) => {
   try {
-    const response = await messageService.getMessagesByRoomId(roomId);
-    store.dispatch({
-      type: ACTION_TYPE_CHAT.FETCH_MESSAGE_HISTORY,
-      payload: response.data
-    }); 
+    let {token} = JSON.parse(localStorage.getItem("credentials"));
+    const response = await messageService.getMessagesByRoomId({roomId, accessToken: token});
+    if (!response.error){
+      store.dispatch({
+        type: ACTION_TYPE_CHAT.FETCH_MESSAGE_HISTORY_SUCCESS,
+        payload: response.data
+      }); 
+    } else {
+      store.dispatch({
+        type: ACTION_TYPE_CHAT.FETCH_MESSAGE_HISTORY_FAILED,
+        error: response.message
+      }); 
+    }
   }catch(err){
     console.log(err);
   }

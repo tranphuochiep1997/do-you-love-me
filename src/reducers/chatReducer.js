@@ -2,7 +2,8 @@ import {ACTION_TYPE_CHAT} from "../constants/actionType";
 
 const initialState = {
   roomId: '',
-  messageModels: []
+  messageModels: [],
+  error: ""
 }
 
 const chatReducer = (state = initialState, action = {})=>{
@@ -21,10 +22,15 @@ const chatReducer = (state = initialState, action = {})=>{
         ...state,
         roomId: action.payload
       }
-    case ACTION_TYPE_CHAT.FETCH_MESSAGE_HISTORY:
+    case ACTION_TYPE_CHAT.FETCH_MESSAGE_HISTORY_SUCCESS:
       return {
         ...state,
         messageModels: action.payload
+      }
+    case ACTION_TYPE_CHAT.FETCH_MESSAGE_HISTORY_FAILED:
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state;

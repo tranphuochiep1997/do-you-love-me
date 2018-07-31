@@ -6,33 +6,31 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import UserProfile from "./views/UserProfile";
 import {connect} from "react-redux";
 import ChatRoom from "./views/ChatRoom";
-import Navbar from './components/Navbar/Navbar';
 import FriendProfile from './views/FriendProfile';
+import Register from './views/Register';
+import SearchPage from "./views/SearchPage";
 
 
 class App extends Component {
   render() {
     return (     
-      <div>
-      {
-        this.props.loggedIn ? <Navbar /> : null
-      } 
       <Router>
         <Switch>
           <PrivateRoute exact path="/" loggedIn={this.props.loggedIn} component={Home} />
           <PrivateRoute exact path="/profile/me" loggedIn={this.props.loggedIn} component={UserProfile} />
           <PrivateRoute exact path="/profile/:id" loggedIn={this.props.loggedIn} component={FriendProfile} />
           <PrivateRoute exact path="/chat/:id" loggedIn={this.props.loggedIn} component={ChatRoom} />
+          <PrivateRoute exact path="/search/:name" loggedIn={this.props.loggedIn} component={SearchPage} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
         </Switch>
       </Router>
-      </div>
     );
   }
 }
 const mapStateToProps = state => {
   return {
-    loggedIn: state.authenticationReducer.loggedIn
+    loggedIn: state.userReducer.loggedIn
   }
 }
 

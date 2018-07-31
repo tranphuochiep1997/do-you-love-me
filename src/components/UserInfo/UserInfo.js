@@ -3,8 +3,6 @@ import "./UserInfo.css";
 
 const UserInfo = (props) => {
   let {gender, birthday, name, status, about} = props;
-  
-  let transferGender = gender === 0 ? "Female" :(gender === 1 ?  "Male" : "");
   let trasnferBirthday = "";
   if (birthday){
     let splitDate = birthday.split("T")[0].split("-");
@@ -26,7 +24,7 @@ const UserInfo = (props) => {
         <span>Birthday</span><span className="detail-value">{trasnferBirthday}</span>
       </div>
       <div className="userInfo-detail">
-        <span>Gender</span><span className="detail-value">{transferGender}</span>
+        <span>Gender</span><span className="detail-value">{gender}</span>
       </div>
       <div className="userInfo-detail">
         <span>About</span><p className="detail-value">{about}</p>

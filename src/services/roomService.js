@@ -1,14 +1,14 @@
 import {config} from "../constants/config";
 
-  const getRoomId = async ({relatingUserId, relatedUserId}) => {
+  const getRoomId = async ({relatedUserId, accessToken}) => {
     try {  
-      const response = await fetch(`${config.SERVER_API}/rooms?users=${relatingUserId},${relatedUserId}`, {
+      const response = await fetch(`${config.SERVER_API}/rooms/${relatedUserId}`, {
         method: 'GET',
         headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${accessToken}`
         },
-        mode: "cors"
       });
       const json = await response.json();
       return json;

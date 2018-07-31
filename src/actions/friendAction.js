@@ -6,7 +6,7 @@ export const getFriendProfile = async (userId) => {
   store.dispatch({
     type: ACTION_TYPE_FRIEND.GET_FRIEND_PROFILE_DOING
   });
-  const response = await userService.getUserByFacebookId(userId);
+  const response = await userService.getUserById(userId);
   store.dispatch({
     type: ACTION_TYPE_FRIEND.GET_FRIEND_PROFILE_SUCCESS,
     payload: response.data

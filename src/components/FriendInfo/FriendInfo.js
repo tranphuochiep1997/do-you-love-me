@@ -2,19 +2,18 @@ import React, { Component } from "react";
 import "./FriendInfo.css";
 
 const FriendInfo = (props) => {
-  let { name, status, gender, birthday, about, picture } = props;
-  if (gender) {
-    gender = gender === 0 ? "Female" : "Male";
-  }
+  let { name, status, gender, birthday, about, picture, _id } = props;
+  let transferBirthday = "";
   if (birthday) {
     let splitDate = birthday.split("T")[0].split("-");
-    birthday = splitDate[2] + '/' + splitDate[1] + "/" + splitDate[0];
+    transferBirthday = splitDate[2] + '/' + splitDate[1] + "/" + splitDate[0];
   }
   return (
     <div className="friendInfo">
       <div className="friendInfo-wrap-info float-left">
         <div className="friendInfo-heading">
-          <span>BASIC INFORMATION</span>
+          <span className="">BASIC INFORMATION</span>
+          <button onClick={()=>{props.history.push(`/chat/${_id}`)}} className="btn btn-outline-success btn-md btn-message" type="button">Message</button>
         </div>
         <div className="friendInfo-detail">
           <span>Name</span><span className="detail-value">{name}</span>
@@ -23,7 +22,7 @@ const FriendInfo = (props) => {
           <span>Status</span><span className="detail-value">{status}</span>
         </div>
         <div className="friendInfo-detail">
-          <span>Birthday</span><span className="detail-value">{birthday}</span>
+          <span>Birthday</span><span className="detail-value">{transferBirthday}</span>
         </div>
         <div className="friendInfo-detail">
           <span>Gender</span><span className="detail-value">{gender}</span>

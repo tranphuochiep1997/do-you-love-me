@@ -1,4 +1,5 @@
 .friendInfo {
+  position: relative;
   padding: 5px;
   height: 100%;
   width: 100%;
@@ -8,14 +9,12 @@
   justify-content: space-between;
 }
 .friendInfo-wrap-info {
-  font-size: 14px;
+  font-size: 20px;
   color: #90949c;
   line-height: 18px;
   height: 100%;
   width: 50%;
-  position: relative;
 }
-
 .friendInfo-wrap-img {
   width: 50%;
   height: 100%;
@@ -26,23 +25,28 @@
 }
 .friendInfo-wrap-img > img {
   height: auto;
-  width: 90%;
-  max-width: 300px;
+  max-width: 90%;
   object-fit: cover;
   overflow: hidden;
 }
-
 .friendInfo-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   font-weight: bold;
   padding: 5px 0px;
   color: #4AB3F4;
 }
 .friendInfo-detail{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 12px 0px;
   border-top: 0.5px solid rgba(0, 0, 0, 0.5);
+  overflow-wrap: break-word;
 }
 .friendInfo-detail .detail-value {
-  float: right;
   text-align: left;
   color: rgba(0, 0, 0, 0.8);
   width: 60%;
@@ -50,5 +54,13 @@
 @media screen and (max-width: 600px) {
   .friendInfo-wrap-info {
     font-size: 11px;
+  }
+  .friendInfo {
+    position: relative;
+  }
+  .btn-message {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
   }
 }

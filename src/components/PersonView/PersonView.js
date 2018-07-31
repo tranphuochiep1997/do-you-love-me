@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./personView.css";
-import { getFriendProfile } from "../../actions/friendAction";
+import {Link} from "react-router-dom";
 
 class PersonView extends Component {
   constructor(props){
@@ -8,24 +8,26 @@ class PersonView extends Component {
     this.handleClickMessage = this.handleClickMessage.bind(this);
   }
   handleClickMessage(){
-    this.props.history.push(`/chat/${this.props.facebookId}`);
+    this.props.history.push(`/chat/${this.props._id}`);
   }
   render(){
-    let {picture, name, status, facebookId} = this.props;
+    let {picture, name, status, _id} = this.props;
     return (
       <div className="person-view">
+        <div className="person-view-left">
           <div className="person-view-wrap-img">
-            <a href={`/profile/${facebookId}`}>
-              <img src={picture} alt=""/>
-            </a>
+            <Link to={`/profile/${_id}`}>
+              <img className="pewson-view-picture" src={picture} alt=""/>
+            </Link>
           </div>
           <div className="person-view-wrap-content">
-            <a className="person-view-name" href={`/profile/${facebookId}`}>{name}</a>
+            <Link className="person-view-name" to={`/profile/${_id}`}>{name}</Link>
             <p className="person-view-status">{status || "..."}</p>
           </div>
-          <div className="person-view-wrap-message">
-            <button onClick={this.handleClickMessage} type="button" value="Message">Message</button>
-          </div>
+        </div>
+        <div className="person-view-wrap-message">
+          <button className="btn btn-outline-success btn-md" onClick={this.handleClickMessage} type="button" value="Message">Message</button>
+        </div>
       </div>
     );
   }

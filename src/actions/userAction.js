@@ -1,44 +1,23 @@
 import {store} from "../store/store";
 import {ACTION_TYPE_USER} from '../constants/actionType';
 import {userService} from "../services/userService";
-import {FacebookApi} from "../helpers/FacebookApi";
 
 export const getUserProfile = async ()=> {
   store.dispatch({
     type: ACTION_TYPE_USER.GET_USER_PROFILE_DOING
   });
-  const {userID, accessToken} = JSON.parse((localStorage.getItem('user')));
+  const {user, token} = JSON.parse((localStorage.getItem('user')));
   try {
-    let getResponse = await userService.getUserByFacebookId(userID);
+    let getResponse = await userService.getUserById(user._id);
     if (!getResponse.error) {
       store.dispatch({
         type: ACTION_TYPE_USER.GET_USER_PROFILE_SUCCESS,
         payload: getResponse.data
       });
-    } else if (getResponse.message === "user_not_exist"){
-      const user = await FacebookApi.getUser({userID, accessToken});
-      if (!user.error){
-        user.facebookId = user.id;
-        delete user.id;
-        const createdUser = await userService.createNewUser(user);
-        if (!createdUser.error){
-          store.dispatch({
-            type: ACTION_TYPE_USER.GET_USER_PROFILE_SUCCESS,
-            payload: createdUser.data
-          });
-        } else {
-          store.dispatch({
-            type: ACTION_TYPE_USER.GET_USER_PROFILE_FAILED,
-          });
-        }
-        
-      } else{
-        store.dispatch({
-          type: ACTION_TYPE_USER.GET_USER_PROFILE_FAILED
-        });
-      }
-      
-    }
+    } 
+    store.dispatch({
+      type: ACTION_TYPE_USER.GET_USER_PROFILE_FAILED,
+    });
   } catch(err) {
     console.log(err);
     store.dispatch({
@@ -47,20 +26,27 @@ export const getUserProfile = async ()=> {
   }
 }
 
-export const updateProfile = async(user) =>{
+export const updateProfile = async(newUser) =>{
   try {
-    const userID = JSON.parse(localStorage.getItem("user")).userID;
-    const response = await userService.updateUser(userID, user);
+    let data = JSON.parse(localStorage.getItem("credentials"));
+    const response = await userService.updateUser({userId: data.user._id, user: newUser, accessToken: data.token});
     if (!response.error){
+      data.user = response.data;
+      localStorage.setItem("credentials", JSON.stringify(data));
       store.dispatch({
         type: ACTION_TYPE_USER.UPDATE_USER_PROFILE_SUCCESS,
         payload: response.data
       });
-    }else {
-      store.dispatch({
-        type: ACTION_TYPE_USER.UPDATE_USER_PROFILE_FAILED
-      });
-    }
+    }else if (response.message === "invalid_token"){
+        localStorage.setItem("credentials", JSON.stringify(data));
+        store.dispatch({
+          type: ACTION_TYPE_USER.TOKEN_EXPIRED
+        });
+      }else {
+        store.dispatch({
+          type: ACTION_TYPE_USER.UPDATE_USER_PROFILE_FAILED
+        });
+      }
   } catch(err){
     console.log(err);
     store.dispatch({

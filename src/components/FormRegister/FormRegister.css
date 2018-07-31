@@ -1,0 +1,22 @@
+
+.wrap-form-register {
+  width: 600px;
+  margin-top: 20px;
+  padding-top: 50px;
+}
+.wrap-form-register .alert-light {
+  visibility: hidden;
+}
+.form-register { 
+  padding: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2)
+}
+.form-register-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+@media only screen and (max-width: 600px) {
+  .wrap-form-register {
+    width: 100%;
+  }
+}

@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import FacebookButton from "../components/FacebookButton/FacebookButton";
-import "../styles/loginStyle.css";
-import FormLogin from "../components/FormLogin/FormLogin";
+import FormRegister from "../components/FormRegister/FormRegister";
 
-class Login extends Component {
+class Register extends Component {
   constructor(props){
     super(props);
   }
   render(){
     return (
-      <div className="wrap-login">
-        <FormLogin history={this.props.history} />
+      <div >
+        <FormRegister history={this.props.history} />
       </div>
     );
   }
 }
 
-export default Login;
+export default Register;

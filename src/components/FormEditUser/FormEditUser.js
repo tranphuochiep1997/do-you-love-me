@@ -5,12 +5,13 @@ import "./FormEditUser.css";
 class FormEditUser extends PureComponent {
   constructor(props) {
     super(props);
-    let {name, birthday, status, gender, about} = props;
+    let {name, birthday, status, gender, about, picture} = props;
     this.state = {
       name: name || "",
       status,
-      birthday: !birthday ? "" : birthday.split("T")[0],
-      gender: gender === 0 ? 0 : (gender === 1 ? 1 : ""),
+      birthday: birthday ? birthday.split("T")[0] : birthday,
+      gender,
+      picture,
       about: about || ""
     }
 
@@ -37,12 +38,12 @@ class FormEditUser extends PureComponent {
       hasChanged = true;
     }
     if (state.birthday !== props.birthday){
-      if (state.birthday){
-        user.birthday = new Date(state.birthday).toISOString();
-      } else {
-        user.birthday = "";
-      }
-      hasChanged = true;
+        if (state.birthday){
+          user.birthday = new Date(state.birthday).toISOString();
+        } else {
+          user.birthday = "";
+        }
+        hasChanged = true;
     }
     if (state.gender !== props.gender){
       user.gender = state.gender;
@@ -54,6 +55,11 @@ class FormEditUser extends PureComponent {
     }
     if (state.status !== props.status){
       user.status = state.status;
+      hasChanged = true;
+    }
+    if (state.picture && state.picture !== props.picture){
+      console.log("picture changed");
+      user.picture = state.picture;
       hasChanged = true;
     }
     return {
@@ -77,23 +83,29 @@ class FormEditUser extends PureComponent {
         </div>
         <div className="formEditUser-edit-detail">
           <span>Name</span>
-          <input maxLength="30" name="name" className="detail-value" onChange={this.handleChange} value={this.state.name} />
+          <input maxLength="30" name="name" autoComplete="off" className="detail-value" onChange={this.handleChange} value={this.state.name} />
         </div>
         <div className="formEditUser-edit-detail">
           <span>Status</span>
-          <input maxLength="20" name="status" className="detail-value" onChange={this.handleChange} value={this.state.status} />
+          <input maxLength="20" name="status" autoComplete="off" className="detail-value" onChange={this.handleChange} value={this.state.status} />
         </div>
         <div className="formEditUser-edit-detail">
           <span>Birthday</span>
-          <input name="birthday" type="date" max={new Date().toISOString().split('T')[0]} className="detail-value input-birthday" onChange={this.handleChange} value={this.state.birthday} />
+          <input name="birthday" type="date" autoComplete="off" max={new Date().toISOString().split('T')[0]} className="detail-value input-birthday" 
+            onChange={this.handleChange} value={this.state.birthday ? this.state.birthday : ""} />
         </div>
         <div className="formEditUser-edit-detail">
           <span>Gender</span>
           <select className="detail-value" value={this.state.gender} name="gender" onChange={this.handleChange}>
-            <option value="1">Male</option>
-            <option value="0">Female</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+            <option value="other">other</option>
             <option value=""></option>
           </select>
+        </div>
+        <div className="formEditUser-edit-detail">
+          <span>Image url</span>
+          <input name="picture" autoComplete="off" className="detail-value" onChange={this.handleChange} value={this.state.picture} />
         </div>
         <div className="formEditUser-edit-detail">
           <span>About</span>

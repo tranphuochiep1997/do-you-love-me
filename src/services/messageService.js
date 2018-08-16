@@ -1,7 +1,7 @@
 import {config} from "../constants/config";
 
-const getMessagesByRoomId = async ({roomId, page=0, accessToken}) => {
-  const response = await fetch(`${config.SERVER_API}/messages?roomId=${roomId}&page=${page}`, {
+const getMessagesByRoomId = async ({roomId, accessToken}) => {
+  const response = await fetch(`${config.SERVER_API}/messages?roomId=${roomId}`, {
     method: 'GET',
     headers: {
     'Accept': 'application/json',

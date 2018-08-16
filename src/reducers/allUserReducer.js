@@ -1,6 +1,5 @@
 import {ACTION_TYPE_USER} from '../constants/actionType';
 
-const credentials = JSON.parse(localStorage.getItem("credentials"));
 
 const initialState = {
   users: [],
@@ -8,7 +7,7 @@ const initialState = {
   nextPage: 0
 }
 
-const allUserReducer = (state = initialState, action = {}) => {
+const allUserReducer =  (state = initialState, action = {}) => {
   switch (action.type) {
     case ACTION_TYPE_USER.GET_ALL_USER_DOING:
       return {
@@ -17,22 +16,23 @@ const allUserReducer = (state = initialState, action = {}) => {
         nextPage: 0
       }
     case ACTION_TYPE_USER.GET_ALL_USER_SUCCESS:
-      const userWithoutCurrentUser = action.payload.filter(user =>{
-        return user._id !== credentials.user._id;
-      });
+      // const userWithoutCurrentUser = action.payload.filter(user =>{
+      //   return user._id !== credentials.user._id;
+      // });
       return {
         ...state,
-        users: userWithoutCurrentUser,
+        users: action.payload,
         nextPage: action.nextPage,
         loading: false
       }
     case ACTION_TYPE_USER.LOAD_MORE_USER_SUCCESS:
-      const userWithoutCurrentUserLoadMore = action.payload.filter(user =>{
-        return user._id !== credentials.currentUserId;
-      });
+      // let currentUserId = JSON.parse(localStorage.getItem("credentials")).user._id;
+      // const userWithoutCurrentUserLoadMore = action.payload.filter(user =>{
+      //   return user._id !== currentUserId;
+      // });
       return {
         ...state,
-        users: [...state.users, ...userWithoutCurrentUserLoadMore],
+        users: [...state.users, ...action.payload],
         nextPage: action.nextPage,
         loading: false
       }

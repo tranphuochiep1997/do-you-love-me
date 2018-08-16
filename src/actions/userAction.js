@@ -64,8 +64,8 @@ export const getAllUser = async(page=0) =>{
     if (!response.error){
       store.dispatch({
         type: ACTION_TYPE_USER.GET_ALL_USER_SUCCESS,
-        nextPage: response.data.length >= config.LIMIT_REQUEST_USER ? ++page : 0,
-        payload: response.data
+        payload: response.data,
+        nextPage: response.data.length >= config.LIMIT_REQUEST_USER ? ++page : 0
       });
     }else {
       store.dispatch({

@@ -24,7 +24,9 @@ class ChatRoom extends Component {
         console.log(err);
       })
   }
-
+  // componentWillUnmount(){
+  //   setRoomId("");
+  // }
   render() {
     return (
       <div>

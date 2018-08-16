@@ -22,6 +22,7 @@ class ViewList extends Component {
   }
   render() {
     let {users, listTitle, loading, nextPage} = this.props;
+    const currentUserId = JSON.parse(localStorage.getItem("credentials")).user._id;
     return (
       <div className="view-list">
         <div className="view-list-title">
@@ -32,10 +33,12 @@ class ViewList extends Component {
             (!!users.length)
             ?
             users.map((user, key)=>{
+              if (user._id !== currentUserId){
                 return <PersonView history={this.props.history} key={key} {...user}/>
+              }
             })
             : 
-            <p className="view-list-no-user">No current users</p>
+            (!loading ? <p className="view-list-no-user">No current users</p> : null)
           }
           {
             loading ? <LoadingIcon size="50px" /> : null

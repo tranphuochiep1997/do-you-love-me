@@ -7,6 +7,7 @@ import { config } from "../../constants/config";
 import io from 'socket.io-client';
 import { connect } from "react-redux";
 import {addMessage} from "../../actions/chatAction";
+import {Link} from "react-router-dom";
 
 class ChatBox extends PureComponent {
   constructor(props) {
@@ -15,38 +16,44 @@ class ChatBox extends PureComponent {
       messageInput: ""
     }
     this.socket = io(`${config.SERVER_CHAT}`, {
-      path: "/api/chat",
-      query:  `token=${JSON.parse(localStorage.getItem("credentials")).token}`,  
-      transports: ['websocket']
-    });
+        path: "/api/chat",
+        query:  `token=${JSON.parse(localStorage.getItem("credentials")).token}`,  
+        transports: ['websocket']
+      });
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   componentDidMount() {
-      const {error} = this.props;    
-      if (error){
-        alert(error);
-        this.props.history.goback();
-      }
-      this.socket.on("RECEIVE_MESSAGE", (message)=>{
-        let messageModel = {
-          sender: "",
-          body: message
-        };
-        addMessage(messageModel);
-      });
+    const {error} = this.props;    
+    if (error){
+      alert(error);
+      this.props.history.goback();
+    }
+
+    this.socket.on("RECEIVE_MESSAGE", (message)=>{
+      let messageModel = {
+        sender: "",
+        body: message
+      };
+      addMessage(messageModel);
+    });
     
     this.socket.on("error", (err)=>{
       console.log(err);
     });
   }
-
+ 
   componentWillReceiveProps(nextProps) {
     let roomChanged = this.props.roomId !== nextProps.roomId
-
     if(roomChanged) {
       this.socket.emit("JOIN_ROOM", nextProps.roomId);
     }
+  }
+
+  componentWillUnmount() {
+    this.socket.disconnect();
   }
 
   handleChange(event) {
@@ -80,13 +87,16 @@ class ChatBox extends PureComponent {
   render() {
     return (
       <div className="container chatbox">
-        <div className="chatbox-heading">
-          <p>{this.props.friendProfile.name}</p>
+        <div>
+          <Link className="chatbox-heading" to={`/profile/${this.props.friendProfile._id}`}>{this.props.friendProfile.name}</Link>
         </div>
         <div className="chatbox-body">
           <ChatView roomId={this.props.roomId} user={this.props.user} friendProfile={this.props.friendProfile}/>
           <form className="chatbox-input" onSubmit={this.handleSubmit}>
-            <input  type="text" autoComplete="off" className="input-message" name="messageInput" onChange={this.handleChange} value={this.state.messageInput} type="text" placeholder="Write your message..." />
+            <input  type="text" autoComplete="off" className="input-message" 
+              disabled={!this.props.roomId} 
+              name="messageInput" onChange={this.handleChange} value={this.state.messageInput} 
+              type="text" placeholder="Write your message..." />
             <button className="send-message" type="submit" disabled={!this.state.messageInput || !this.props.roomId} >
               <FontAwesomeIcon icon={faPaperPlane} size="lg" />
             </button>
@@ -107,4 +117,18 @@ const mapStateToProps = state => {
     friendProfile: state.friendReducer.friendProfile
   }
 }
+// function sendSocketMessage(message) {
+//   return {
+//       type : "SEND_MESSAGE",
+//       payload : message
+//   }
+// }
+// function joinRoom(roomId) {
+//   return {
+//       type : "JOIN_ROOM",
+//       payload : roomId
+//   }
+// }
+
+// export default connect(mapStateToProps, {sendSocketMessage, joinRoom})(ChatBox);
 export default connect(mapStateToProps)(ChatBox);

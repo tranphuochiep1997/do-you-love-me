@@ -7,6 +7,10 @@
 .chatbox-heading {
   font-weight: bold;
   font-size: 20px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.chatbox-heading:hover{
+  color: rgba(0, 0, 0, 0.7);
 }
 .chatbox-body {
   color: rgba(0, 0, 0, 0.7);
@@ -26,6 +30,7 @@
   width: 90%;
 }
 .send-message {
+  width: 10%;
   box-shadow: none;
   outline: none;
   padding: 3px;

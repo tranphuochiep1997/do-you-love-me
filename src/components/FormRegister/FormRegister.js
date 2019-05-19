@@ -3,7 +3,6 @@ import React, { PureComponent } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import {authService} from "../../services/authService";
-import {loginSuccess} from "../../actions/authenticationAction";
 
 class FormRegister extends PureComponent {
   constructor(props) {

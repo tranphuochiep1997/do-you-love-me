@@ -1,6 +1,5 @@
 import "./FormSearch.css";
 import React, {PureComponent} from "react";
-import {connect} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import $ from 'jquery';

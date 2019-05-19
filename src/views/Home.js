@@ -3,9 +3,6 @@ import ViewPage from "../components/ViewPage/ViewPage";
 import Navbar from "../components/Navbar/Navbar";
 
 class Home extends Component {
-  constructor(props){
-    super(props);
-  }
   render() {
     return (
         <div>

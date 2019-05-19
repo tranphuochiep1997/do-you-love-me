@@ -36,6 +36,8 @@ class ViewList extends Component {
               if (user._id !== currentUserId){
                 return <PersonView history={this.props.history} key={key} {...user}/>
               }
+
+              return null;
             })
             : 
             (!loading ? <p className="view-list-no-user">No current users</p> : null)

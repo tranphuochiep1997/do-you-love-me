@@ -96,7 +96,7 @@ class ChatBox extends PureComponent {
             <input  type="text" autoComplete="off" className="input-message" 
               disabled={!this.props.roomId} 
               name="messageInput" onChange={this.handleChange} value={this.state.messageInput} 
-              type="text" placeholder="Write your message..." />
+              placeholder="Write your message..." />
             <button className="send-message" type="submit" disabled={!this.state.messageInput || !this.props.roomId} >
               <FontAwesomeIcon icon={faPaperPlane} size="lg" />
             </button>

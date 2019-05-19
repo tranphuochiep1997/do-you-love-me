@@ -3,9 +3,6 @@ import PersonViewFull from "../components/PersonViewFull/PersonViewFull";
 import Navbar from "../components/Navbar/Navbar";
 
 class UserProfile extends Component {
-  constructor(props){
-    super(props);
-  }
   render(){
     return (
       <div>

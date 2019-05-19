@@ -3,9 +3,6 @@ import SearchList from "../components/SearchList/SearchList";
 import Navbar from "../components/Navbar/Navbar";
 
 class SearchPage extends PureComponent {
-  constructor(props){
-    super(props)
-  }
   render(){
     return(
       <div>

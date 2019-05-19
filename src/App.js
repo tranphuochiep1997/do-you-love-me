@@ -13,16 +13,17 @@ import SearchPage from "./views/SearchPage";
 
 class App extends Component {
   render() {
+    const { loggedIn } = this.props;
     return (     
       <Router>
         <Switch>
-          <PrivateRoute exact path="/" loggedIn={this.props.loggedIn} component={Home} />
-          <PrivateRoute exact path="/profile/me" loggedIn={this.props.loggedIn} component={UserProfile} />
-          <PrivateRoute exact path="/profile/:id" loggedIn={this.props.loggedIn} component={FriendProfile} />
-          <PrivateRoute exact path="/chat/:id" loggedIn={this.props.loggedIn} component={ChatRoom} />
-          <PrivateRoute exact path="/search/:name" loggedIn={this.props.loggedIn} component={SearchPage} />
+          <PrivateRoute exact path="/profile/me" loggedIn={loggedIn} component={UserProfile} />
+          <PrivateRoute exact path="/profile/:id" loggedIn={loggedIn} component={FriendProfile} />
+          <PrivateRoute exact path="/chat/:id" loggedIn={loggedIn} component={ChatRoom} />
+          <PrivateRoute exact path="/search/:name" loggedIn={loggedIn} component={SearchPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <PrivateRoute path="/" loggedIn={loggedIn} component={Home} />
         </Switch>
       </Router>
     );

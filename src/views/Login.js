@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
-import FacebookButton from "../components/FacebookButton/FacebookButton";
+// import {connect} from "react-redux";
+// import FacebookButton from "../components/FacebookButton/FacebookButton";
 import "../styles/loginStyle.css";
 import FormLogin from "../components/FormLogin/FormLogin";
 
 class Login extends Component {
-  constructor(props){
-    super(props);
-  }
   render(){
     return (
       <div className="wrap-login">

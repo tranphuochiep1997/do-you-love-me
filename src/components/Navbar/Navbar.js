@@ -38,7 +38,7 @@ class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item dropdown nav-item-dropdown">
-              <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+              <button className="nav-link dropdown-toggle btn btn-link btn-lg" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <button onClick={this.handleLogout} className="dropdown-item">Logout</button>
               </div>

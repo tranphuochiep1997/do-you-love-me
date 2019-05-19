@@ -17,12 +17,12 @@ class App extends Component {
     return (     
       <Router>
         <Switch>
+        <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           <PrivateRoute exact path="/profile/me" loggedIn={loggedIn} component={UserProfile} />
           <PrivateRoute exact path="/profile/:id" loggedIn={loggedIn} component={FriendProfile} />
           <PrivateRoute exact path="/chat/:id" loggedIn={loggedIn} component={ChatRoom} />
           <PrivateRoute exact path="/search/:name" loggedIn={loggedIn} component={SearchPage} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
           <PrivateRoute path="/" loggedIn={loggedIn} component={Home} />
         </Switch>
       </Router>
